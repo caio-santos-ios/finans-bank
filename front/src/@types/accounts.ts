@@ -4,6 +4,7 @@ export type TLogin = {
 }
 
 export type TRegister = {
+    photoProfile: string;
     name?: string;
     email: string;
     password: string;
