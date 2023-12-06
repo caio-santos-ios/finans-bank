@@ -1,5 +1,6 @@
 import { Footer } from '@/components/Footer'
 import type { Metadata } from 'next'
+import "@/style/Header.css"
 
 export const metadata: Metadata = {
   title: 'Carteira',

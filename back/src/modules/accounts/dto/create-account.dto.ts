@@ -3,6 +3,8 @@ import { Transform } from "class-transformer";
 import { IsEmail, IsString, MinLength } from "class-validator";
 
 export class CreateAccountDto {
+    photoProfile: string;
+
     @IsString()
     name: string;
     

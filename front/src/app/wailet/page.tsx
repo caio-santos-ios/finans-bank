@@ -3,6 +3,7 @@ import { getCookie } from "cookies-next"
 import { BASE_URL } from "@/service/api"
 import { ContainerTransfer } from "@/components/Transfer"
 import { SendMoney } from "@/components/SendMoney"
+import Image from "next/image"
 
 const account = async (token: string) => {
   const response = await fetch(`${BASE_URL}/accounts`, { headers: { Authorization: `Bearer ${token}`, }})
@@ -19,15 +20,23 @@ export default async function Wailet() {
   const myBalance = parseFloat(myAccount.balance).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})  
 
   return (
-    <main className="body">
-      <section className="grid grid-cols-1 gap-4 justify-items-center pt-48">
-        <div className="w-full sm:w-96 text-center">
-            <h1 className="text-5xl">{myBalance}</h1>
-            <h4>Meu balanço</h4>
-        </div>
-        <ContainerTransfer />
-        <SendMoney />
-      </section>
-    </main>
+    <>
+      <header className="header_section">
+            <nav className="nav_section flex gap-4 items-center"> 
+              <Image width={600} height={400} className="border border-gray-600 rounded-full w-11 h-11" alt="foto-de-perfil" src={myAccount.photoProfile} />
+              <h2 className="font-medium text-xl">{myAccount.name}</h2>
+            </nav>
+      </header>
+      <main className="body">
+        <section className="grid grid-cols-1 gap-4 justify-items-center pt-48">
+          <div className="w-full sm:w-96 text-center">
+              <h1 className="text-5xl">{myBalance}</h1>
+              <h4>Meu balanço</h4>
+          </div>
+          <ContainerTransfer />
+          <SendMoney />
+        </section>
+      </main>
+    </>
   )
 }

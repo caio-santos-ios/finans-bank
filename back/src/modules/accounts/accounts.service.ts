@@ -4,23 +4,31 @@ import { UpdateAccountDto } from './dto/update-account.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { Account } from './entities/account.entity';
 import { plainToInstance } from 'class-transformer';
+import { v2 as cloudinary } from 'cloudinary';
 
 @Injectable()
 export class AccountsService {
-  
-  constructor(private prisma: PrismaService){}
+  constructor(private prisma: PrismaService ){}
 
   async create(createAccountDto: CreateAccountDto) {
+    //return createAccountDto
     const findEmail = await this.prisma.account.findFirst({
       where: {email: createAccountDto.email}
     })
-
+    
     if(findEmail) throw new ConflictException("Email inválido")
-
+    
+    
     const user = new Account()
-
+    
     Object.assign(user, {...createAccountDto})
-
+    
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.API_KEY,
+      api_secret: process.env.API_SECRET,
+    })
+    
     const myUser = await this.prisma.account.create({data:{...createAccountDto}})
 
     return plainToInstance(Account, myUser);

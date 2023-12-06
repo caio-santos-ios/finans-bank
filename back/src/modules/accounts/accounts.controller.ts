@@ -1,16 +1,36 @@
-import { Controller, Get, Post, Body, Request, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Request, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { v2 as cloudinary } from 'cloudinary';
+
 
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountsService.create(createAccountDto);
+  @UseInterceptors(FileInterceptor('photoProfile'))
+  async create(@Body() createAccountDto: CreateAccountDto, @UploadedFile() file: Express.Multer.File) {
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.API_KEY,
+      api_secret: process.env.API_SECRET,
+    })
+
+    let photoProfile;
+
+    try {
+      const result = await cloudinary.uploader.upload(file.path)
+      photoProfile = result.secure_url
+    } catch (error) {
+      throw new error;
+    }
+    
+    const user = {...createAccountDto, photoProfile}
+    return this.accountsService.create(user);
   }
 
   @Get()

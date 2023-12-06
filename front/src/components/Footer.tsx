@@ -35,7 +35,7 @@ export const Footer = () => {
     return(
         <>
             <footer className="min-w-full absolute bottom-0 flex justify-center">
-                <div ref={minhaRef} className="py-16 w-full sm:w-[45rem] h-full flex justify-evenly">
+                <div ref={minhaRef} className="py-16 w-full md:w-[45rem] h-full flex justify-evenly">
                     <button id="wailet" onClick={mySelect} className={select == "wailet" ? "btn_icons text-blue-500" : "btn_icons"}>
                         <PiWallet size={35} />
                         <p>Carteira</p>
@@ -43,10 +43,6 @@ export const Footer = () => {
                     <button id="historic" onClick={mySelect} className={select == "historic" ? "btn_icons text-blue-500" : "btn_icons"}>
                         <MdOutlineHistory size={35} />
                         <p>Historico</p>
-                    </button>
-                    <button id="card" onClick={mySelect} className={select == "card" ? "btn_icons text-blue-500" : "btn_icons"}>
-                        <FaRegCreditCard size={35} />
-                        <p>Cartões</p>
                     </button>
                     <button id="account" onClick={mySelect} className={select == "account" ? "btn_icons text-blue-500" : "btn_icons"}>
                         <MdAccountCircle size={35} />

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .header_section { @apply bg-blue-500 flex justify-center h-32 }
+    .nav_section { @apply w-11/12 md:w-[43rem] py-10 }
+
+}
