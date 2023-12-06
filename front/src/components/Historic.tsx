@@ -9,7 +9,7 @@ interface HistoricProps {
 export const Historic = ({listHistoric}: HistoricProps) => {
     return (
         <ul className="bg-slate-500 w-8 h-8">
-            {listHistoric.map((el: any) => <CardAccount account={el}/>)}
+            {listHistoric.map((el: any) => <CardAccount key={el} account={el}/>)}
         </ul>
     )
 }
