@@ -18,9 +18,9 @@ export const SendMoney = () => {
                     </p>
                 </div>
                 {
-                    [1, 2, 3, 4].map(() => {
+                    [1, 2, 3, 4].map((el: number) => {
                         return(
-                            <div className="grid justify-items-center">
+                            <div key={el} className="grid justify-items-center">
                                 <Image className="border border-gray-600 rounded-full w-20 h-20" alt="" src="" />
                                  <p>
                                     Adicionar
