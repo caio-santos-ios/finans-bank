@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image";
+import Image from "next/image"
 
 export const CardAccount = ({account, idUser}: any) => {
     const valueTranfer = parseFloat(account.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})  
