@@ -32,14 +32,45 @@ export class TransfersService {
     return myTransfer;
   }
 
-  async findAll() {
-    const transfers = await this.prisma.transfer.findMany()
-    return transfers;
+  async findAll(id: string) {
+    const transfers = await this.prisma.transfer.findMany({
+      include: {
+        sendAccount: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
+        receiveAccount: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    })
+
+    const listTransfer = []
+
+    transfers.map((el) => {
+      if(el.sendAccountId == Number(id) || el.receiveAccountId == Number(id)){
+        listTransfer.push(el)
+      }
+    })
+    
+    return listTransfer;
   }
 
   async findOne(id: number) {
     const transfer = await this.prisma.transfer.findFirst({
-      where: { id }
+      where: { id },
+      include: {
+        receiveAccount: {
+          select: {
+            name: true
+          }
+        }
+      }
     })
     return transfer;
   }

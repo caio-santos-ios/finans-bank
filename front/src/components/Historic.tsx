@@ -6,10 +6,13 @@ interface HistoricProps {
     listHistoric: any[]
 }
 
-export const Historic = ({listHistoric}: HistoricProps) => {
+export const Historic = ({listHistoric, idUser}: any) => {
+    
     return (
-        <ul className="bg-slate-500 w-8 h-8">
-            {listHistoric.map((el: any) => <CardAccount key={el} account={el}/>)}
+        <ul className="w-full h-[87vh] md:w-[45rem] flex flex-col gap-4 py-8 px-4 overflow-y-auto">
+            {
+                listHistoric.length > 0 && listHistoric.map((account: any) => <CardAccount account={account} idUser={idUser} />)
+            }
         </ul>
     )
 }

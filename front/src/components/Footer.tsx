@@ -35,7 +35,7 @@ export const Footer = () => {
     return(
         <>
             <footer className="min-w-full absolute bottom-0 flex justify-center">
-                <div ref={minhaRef} className="py-16 w-full sm:w-96 h-full flex justify-evenly">
+                <div ref={minhaRef} className="py-16 w-full sm:w-[45rem] h-full flex justify-evenly">
                     <button id="wailet" onClick={mySelect} className={select == "wailet" ? "btn_icons text-blue-500" : "btn_icons"}>
                         <PiWallet size={35} />
                         <p>Carteira</p>

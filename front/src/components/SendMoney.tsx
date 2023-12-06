@@ -6,9 +6,9 @@ import { GoPlus } from "react-icons/go";
 export const SendMoney = () => {  
 
     return(
-        <div className="w-full sm:w-96 py-16">
-            <h1 className="text-start my-4">Enviar dinheiro</h1>
-            <div className="flex gap-2 overflow-auto card_person">
+        <div className="w-full sm:flex sm:w-[35rem] py-16">
+            <h1 className="text-start ml-8 my-4 sm:hidden">Enviar dinheiro</h1>
+            <div className="flex justify-evenly w-full gap-2 overflow-auto card_person">
                 <div className="grid justify-items-center">
                     <button className="border border-gray-600 rounded-full p-5">
                         <GoPlus size={30} />

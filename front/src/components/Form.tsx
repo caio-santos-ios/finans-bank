@@ -14,7 +14,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useState } from "react"
 import { setCookie } from 'cookies-next'
 import { useRouter } from "next/navigation"
-
+import { DotSpinner } from '@uiball/loaders'
+import { IoIosEyeOff, IoIosEye } from "react-icons/io"
 
 interface FormProps {
     login: boolean
@@ -24,6 +25,7 @@ export const Form = ({login}: FormProps) => {
     const mySchema = login ? schemaLogin : schemaRegister
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TRegister>({resolver: zodResolver(mySchema)})
     const [loading, setLoading] = useState(false)
+    const [passwordOff, setPasswordOff] = useState(true)
     const router = useRouter()
 
     const req = async (data: any) => {
@@ -48,11 +50,11 @@ export const Form = ({login}: FormProps) => {
                 }
         }
     }
-    
 
     return(
        <>
             <ToastContainer theme="colored" position="top-right" autoClose={5000} />
+
             {
                 login ? 
                 <form onSubmit={handleSubmit(req)} className="form_login ">
@@ -73,14 +75,24 @@ export const Form = ({login}: FormProps) => {
                         <div className={errors.password ? "div_login_erro text-red-500" : "div_login_erro text-blue-500"}    >
                             <RiLockPasswordFill size={30} />
                         </div>
-                        <input {...register("password")} placeholder="Senha" type="password" className={errors.password ? "input_login text-red-500" : "input_login text-blue-500"} />
+                        <input {...register("password")} placeholder="Senha" type={passwordOff ? "password" : "text"} className={errors.password ? "input_login text-red-500" : "input_login text-blue-500"} />
+                        { 
+                            passwordOff ? 
+                            <button onClick={() => setPasswordOff(false)} type="button" className="absolute right-4 self-center text-blue-500">
+                                <IoIosEyeOff size={30} />
+                            </button> 
+                            : 
+                            <button onClick={() => setPasswordOff(true)} type="button" className="absolute right-4 self-center text-blue-500">
+                                <IoIosEye size={30} />
+                            </button>
+                        }
                     </div>
                     { errors.password ? <p className="h-8 text-red-500 text-start w-full">{errors.password.message}</p> : <p className="h-8"></p> }  
                     {
                         loading ? 
-                        <button className="btn_login">Entrando...</button>
+                        <button className="btn_login"><DotSpinner color="white"/></button>
                         :
-                        <button className="btn_login">Entar</button>
+                        <button className="btn_login">Entrar</button>
                     }          
                 </form>
             : 
@@ -93,7 +105,7 @@ export const Form = ({login}: FormProps) => {
                         <div className={errors.name ? "div_login_erro text-red-500" : "div_login_erro text-blue-500"}>
                             <MdAccountCircle size={30} />
                         </div>
-                        <input {...register("name")} placeholder="Nome" type="text" className={errors.name ? "input_login placeholder:text-red-500" : "input_login"} />
+                        <input {...register("name")} placeholder="Nome" type="text" className={errors.name ? "input_login placeholder:text-red-500" : "input_login text-blue-500"} />
                     </div>
                     { errors.name ? <p className="h-8 text-red-500 text-start w-full">{errors.name.message}</p> : <p className="h-8"></p> }
 
@@ -101,7 +113,7 @@ export const Form = ({login}: FormProps) => {
                         <div className={errors.email ? "div_login_erro text-red-500" : "div_login_erro text-blue-500"}>
                             <MdEmail size={30} />
                         </div>
-                        <input {...register("email")} placeholder="Email" type="email" className={errors.email ? "input_login placeholder:text-red-500" : "input_login"} />
+                        <input {...register("email")} placeholder="Email" type="email" className={errors.email ? "input_login placeholder:text-red-500" : "input_login text-blue-500"} />
                     </div>
                     { errors.email ? <p className="h-8 text-red-500 text-start w-full">{errors.email.message}</p> : <p className="h-8"></p> }
 
@@ -109,12 +121,22 @@ export const Form = ({login}: FormProps) => {
                         <div className={errors.password ? "div_login_erro text-red-500" : "div_login_erro text-blue-500"}>
                             <RiLockPasswordFill size={30} />
                         </div>
-                        <input {...register("password")} placeholder="Senha" type="password" className={errors.password ? "input_login placeholder:text-red-500" : "input_login"} />
+                        <input {...register("password")} placeholder="Senha" type={passwordOff ? "password" : "text"} className={errors.password ? "input_login placeholder:text-red-500" : "input_login text-blue-500"} />
+                        { 
+                            passwordOff ? 
+                            <button onClick={() => setPasswordOff(false)} type="button" className="absolute right-4 self-center text-blue-500">
+                                <IoIosEyeOff size={30} />
+                            </button> 
+                            : 
+                            <button onClick={() => setPasswordOff(true)} type="button" className="absolute right-4 self-center text-blue-500">
+                                <IoIosEye size={30} />
+                            </button>
+                        }
                     </div>            
                     { errors.password ? <p className="h-8 text-red-500 text-start w-full">{errors.password.message}</p> : <p className="h-8"></p> }
                     {
                         loading ? 
-                        <button className="btn_login">Cadastrando...</button>
+                        <button className="btn_login"><DotSpinner color="white"/></button>
                         :
                         <button className="btn_login">Cadastrar</button>
                     }

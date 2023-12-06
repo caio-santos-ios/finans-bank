@@ -16,7 +16,7 @@ export class TransfersController {
   @Get()
   @UseGuards(JwtAuthGuard)
   findAll(@Request() req) {
-    return this.transfersService.findAll();
+    return this.transfersService.findAll(req.user.id);
   }
 
   @Get(':id')

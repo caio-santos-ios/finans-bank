@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Pagina de historico das transações.',
 }
 
-export default function AccountLayout({ children }: { children: React.ReactNode }) {
+export default function HistoricLayout({ children }: { children: React.ReactNode }) {
   
   return (
     <html lang="pt-BR">

@@ -15,7 +15,7 @@ model Account {
   name              String
   email             String @unique
   password          String
-  balance           String @default("0")
+  balance           String @default("10")
   sendTransfers     Transfer[] @relation("sendAccount")
   receiveTransfers  Transfer[] @relation("receiveAccount")
 
