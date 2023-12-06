@@ -7,7 +7,7 @@ interface EditProfileProps {
     idUser: number;
 }
 
-export const EditProfile = ({token, idUser}: EditProfileProps) => {
+export const EditMyProfile = ({token, idUser}: EditProfileProps) => {
     console.log(token)
     return (
         <form>

@@ -1,3 +1,4 @@
+import { EditMyProfile } from "@/components/EditMyProfile"
 import { getCookie } from "cookies-next"
 import { cookies } from "next/headers"
 
@@ -10,7 +11,7 @@ export default async function EditProfile() {
     <>
       <main className="body">
       <section className="section">
-          <EditProfile token={myUser.token} idUser={myUser.id} />
+          <EditMyProfile token={myUser.token} idUser={myUser.id} />
         </section>
       </main>
     </>
