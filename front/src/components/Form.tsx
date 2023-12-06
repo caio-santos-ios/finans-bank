@@ -1,6 +1,6 @@
 "use client"
 
-import { TRegister } from "@/@types/accounts"
+import { TRegister } from "@/@types/accounts";
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { MdAccountCircle, MdEmail } from "react-icons/md"
