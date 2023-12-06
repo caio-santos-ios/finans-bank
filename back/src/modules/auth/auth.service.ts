@@ -19,7 +19,8 @@ export class AuthService {
     if(!passwordValidatad) throw new UnauthorizedException("Email ou senha incorretos")
 
     return {
-      token: this.jwtService.sign({email: createAuthDto.email}, { subject: String(user.id) })
+      token: this.jwtService.sign({email: createAuthDto.email}, { subject: String(user.id) }),
+      id: user.id
     }
   }
 }

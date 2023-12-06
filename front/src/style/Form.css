@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn_login { @apply bg-blue-500 border border-blue-500 text-white hover:text-blue-500 hover:bg-transparent duration-500 rounded-[6rem] w-40 h-14 my-8 }
+
+    .form_login { @apply w-[30rem] p-4 flex flex-col justify-center items-center }
+
+    .input_login { @apply bg-transparent h-full w-10/12 rounded-r-[6rem] outline-0 px-1 }
+
+    .input_login_erro { @apply border rounded-[6rem] w-full h-14 flex justify-between }
+
+    .placeholder_login_erro { @apply rounded-l-3xl w-2/12 flex justify-center items-center }
+
+    .div_login_erro { @apply rounded-l-3xl w-2/12 flex justify-center items-center }
+}

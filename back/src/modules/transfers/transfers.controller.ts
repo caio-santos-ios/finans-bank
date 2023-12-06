@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Request, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Request, Param, UseGuards } from '@nestjs/common';
 import { TransfersService } from './transfers.service';
 import { CreateTransferDto } from './dto/create-transfer.dto';
-import { UpdateTransferDto } from './dto/update-transfer.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('transfers')
@@ -21,6 +20,7 @@ export class TransfersController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.transfersService.findOne(+id);
   }

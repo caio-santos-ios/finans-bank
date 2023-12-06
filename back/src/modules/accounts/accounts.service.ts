@@ -26,9 +26,16 @@ export class AccountsService {
     return plainToInstance(Account, myUser);
   }
 
-  async findAll() {
-    const users = await this.prisma.account.findMany()
-    return plainToInstance(Account, users);
+  async findAll(req: any) {
+    // const users = await this.prisma.account.findMany()
+    
+    // if(req.user.admin) return plainToInstance(Account, users)
+
+    const myUser = this.prisma.account.findUnique({
+      where: { id: Number(req.user.id) }
+    })
+
+    return plainToInstance(Account, myUser);
   }
 
   async findOne(id: number) {
