@@ -11,7 +11,6 @@ export class AccountsService {
   constructor(private prisma: PrismaService ){}
 
   async create(createAccountDto: CreateAccountDto) {
-    //return createAccountDto
     const findEmail = await this.prisma.account.findFirst({
       where: {email: createAccountDto.email}
     })
@@ -83,7 +82,7 @@ export class AccountsService {
     return findUser
   }
 
-  async update(id: number, updateAccountDto: any) {
+  async update(id: number, updateAccountDto: UpdateAccountDto) {
     id = Number(id)
 
     const findUser = await this.prisma.account.findFirst({
@@ -91,9 +90,6 @@ export class AccountsService {
     })
 
     if(!findUser) throw new NotFoundException("Usuário não existe")
-
-    const newBalance = Number(updateAccountDto.balance) + Number(findUser.balance)
-    updateAccountDto.balance = String(newBalance)
 
     const updateAccount = await this.prisma.account.update({where: { id }, data: { ...updateAccountDto }})
     

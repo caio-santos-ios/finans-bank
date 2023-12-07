@@ -1,5 +1,6 @@
-import { Footer } from '@/components/Footer'
 import type { Metadata } from 'next'
+import "@/style/Form.css"
+import "../globals.css"
 
 export const metadata: Metadata = {
   title: 'Editar Perfil',

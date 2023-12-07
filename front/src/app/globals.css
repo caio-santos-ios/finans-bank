@@ -4,8 +4,7 @@
 
 @layer components {
   .body { @apply w-[95vw] h-[80vh] m-auto } 
-
-  .section_login { @apply min-h-full w-full flex justify-center }
+  .section { @apply w-full h-full }
 }
 
 .card_person::-webkit-scrollbar-track {

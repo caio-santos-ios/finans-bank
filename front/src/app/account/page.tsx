@@ -1,9 +1,8 @@
-import { cookies } from "next/headers"
-import { getCookie } from "cookies-next"
 import { BASE_URL } from "@/service/api"
 import Image from "next/image"
 import { ButtonEditProfile } from "@/components/ButtonEditeProfile"
 import { ButtonLogout } from "@/components/ButtonLogout"
+import { VerifyLogged } from "@/components/VerifyLogged"
 
 const account = async (token: string) => {
   const response = await fetch(`${BASE_URL}/accounts`, { headers: { Authorization: `Bearer ${token}`, }})
@@ -11,20 +10,12 @@ const account = async (token: string) => {
 };
 
 export default async function Account() {
-  const user: string | undefined = getCookie('token', { cookies })
-  const decodedUser = decodeURIComponent(user!)
-  console.log(decodedUser)
-  const myUser = JSON.parse(decodedUser)
+  const myUser = VerifyLogged()
 
   const myAccount = await account(myUser.token!)
   
   return (
     <>
-      <header className="header_section">
-            <nav className="nav_section flex gap-4 items-center"> 
-              
-            </nav>
-      </header>
       <main className="body">
         <section className="section grid grid-cols-1 justify-items-center gap-1">
             <div className="w-full md:w-[45rem] grid grid-cols-1 justify-items-center gap-2 py-20">

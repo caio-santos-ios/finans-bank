@@ -33,7 +33,7 @@ export const Form = ({login}: FormProps) => {
         if(login){
             try {
                 const res = await api.post("/login", data)
-                setCookie('token', res.data)
+                setCookie('token', res.data, { maxAge: 60 * 100 })
                 router.push("/wailet")
                 } catch (error: any) { 
                     setLoading(false)
@@ -41,9 +41,10 @@ export const Form = ({login}: FormProps) => {
                 }
             }else{
                 try {
-                    const res = await api.post("/accounts", data)
+                    await api.post("/accounts", data, { headers: { 'Content-Type': 'multipart/form-data' } })
                     reset()
                     toast.success(<div>Conta crida <Link className="p-2 bg-blue-500 text-white rounded-md ml-4" href="/login">Fazer Login</Link></div>)
+                    setLoading(false)
                 } catch (error: any) { 
                     setLoading(false)
                     if(error.response.status == 409) return toast.error("Email inválido")
@@ -57,7 +58,7 @@ export const Form = ({login}: FormProps) => {
 
             {
                 login ? 
-                <form onSubmit={handleSubmit(req)} className="form_login ">
+                <form onSubmit={handleSubmit(req)} className="form_login" method="POST">
                     <div className="my-8 text-gray-700 text-center">
                         <h1 className="font-bold text-4xl">Login</h1>
                         <p className="text-center">Não tem conta? <Link href="/register" className="text-blue-500 font-medium">Inscrever-se</Link></p>
@@ -101,6 +102,7 @@ export const Form = ({login}: FormProps) => {
                         <h1 className="font-bold text-4xl">Inscrever-se</h1>
                         <p className="text-center">Já tem conta? <Link href="/login" className="text-blue-500 font-medium">Login</Link></p>
                     </div>
+                   
                     <div className={errors.name ? "input_login_erro border-red-500" : "input_login_erro border-blue-500"}>
                         <div className={errors.name ? "div_login_erro text-red-500" : "div_login_erro text-blue-500"}>
                             <MdAccountCircle size={30} />

@@ -3,7 +3,6 @@
 import "@/style/Footer.css"
 import { PiWallet } from "react-icons/pi"
 import { MdOutlineHistory, MdAccountCircle } from "react-icons/md"
-import { FaRegCreditCard } from "react-icons/fa6"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { setCookie, getCookie } from "cookies-next"
@@ -18,7 +17,7 @@ export const Footer = () => {
     
     const mySelect = (event: any) => {
         setSelect(event.currentTarget.id)
-        setCookie('select', event.currentTarget.id)
+        setCookie('select', event.currentTarget.id, { maxAge: 60 * 100 })
         router.push(`/${event.currentTarget.id}`)
     }
     

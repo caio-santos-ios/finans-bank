@@ -13,7 +13,8 @@ export class AccountsController {
 
   @Post()
   @UseInterceptors(FileInterceptor('photoProfile'))
-  async create(@Body() createAccountDto: CreateAccountDto, @UploadedFile() file: Express.Multer.File) {
+  async create(@Body() createAccountDto: any, @UploadedFile() file: Express.Multer.File) {
+    
     cloudinary.config({
       cloud_name: process.env.CLOUD_NAME,
       api_key: process.env.API_KEY,

@@ -1,16 +1,12 @@
 import { EditMyProfile } from "@/components/EditMyProfile"
-import { getCookie } from "cookies-next"
-import { cookies } from "next/headers"
+import { VerifyLogged } from "@/components/VerifyLogged"
 
 export default async function EditProfile() {
-  const user: string | undefined = getCookie('token', { cookies })
-  const decodedUser = decodeURIComponent(user!)
-  const myUser = JSON.parse(decodedUser)
-
+  const myUser = VerifyLogged()
   return (
     <>
       <main className="body">
-      <section className="section">
+      <section className="section flex justify-center items-center">
           <EditMyProfile token={myUser.token} idUser={myUser.id} />
         </section>
       </main>

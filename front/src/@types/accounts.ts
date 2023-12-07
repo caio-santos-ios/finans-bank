@@ -9,3 +9,12 @@ export type TRegister = {
     email: string;
     password: string;
 }
+
+export type TAccount = {
+    id: number;
+    name: string;
+    email: string;
+    photoProfile: string;
+    receiveTransfers: [];
+    sendTransfers: [];
+}

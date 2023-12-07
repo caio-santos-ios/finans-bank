@@ -4,16 +4,17 @@ import { BASE_URL } from "@/service/api"
 import { ContainerTransfer } from "@/components/Transfer"
 import { SendMoney } from "@/components/SendMoney"
 import Image from "next/image"
+import { VerifyLogged } from "@/components/VerifyLogged"
+
+export const dynamic = "force-dynamic"
 
 const account = async (token: string) => {
   const response = await fetch(`${BASE_URL}/accounts`, { headers: { Authorization: `Bearer ${token}`, }})
   return response.json();
-};
+}
 
 export default async function Wailet() {
-  const user: string | undefined = getCookie('token', { cookies })
-  const decodedUser = decodeURIComponent(user!)
-  const myUser = JSON.parse(decodedUser)
+  const myUser = VerifyLogged()
 
   const myAccount = await account(myUser.token!)
 
@@ -22,7 +23,7 @@ export default async function Wailet() {
   return (
     <>
       <header className="header_section">
-            <nav className="nav_section flex gap-4 items-center"> 
+            <nav className="nav_section flex gap-4 items-center text-white"> 
               <Image width={600} height={400} className="border border-gray-600 rounded-full w-11 h-11" alt="foto-de-perfil" src={myAccount.photoProfile} />
               <h2 className="font-medium text-xl">{myAccount.name}</h2>
             </nav>
